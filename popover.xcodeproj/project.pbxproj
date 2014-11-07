@@ -259,7 +259,7 @@
 			name = popoverTests;
 			productName = popoverTests;
 			productReference = B1175C7915E3FBEE002FBFF1 /* popoverTests.octest */;
-			productType = "com.apple.product-type.bundle";
+			productType = "com.apple.product-type.bundle.ocunit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -477,7 +477,6 @@
 		B1175C8F15E3FBEE002FBFF1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/popover.app/popover";
 				FRAMEWORK_SEARCH_PATHS = (
 					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
 					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
@@ -486,7 +485,6 @@
 				GCC_PREFIX_HEADER = "popover/popover-Prefix.pch";
 				INFOPLIST_FILE = "popoverTests/popoverTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = octest;
 			};
 			name = Debug;
@@ -494,7 +492,6 @@
 		B1175C9015E3FBEE002FBFF1 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/popover.app/popover";
 				FRAMEWORK_SEARCH_PATHS = (
 					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
 					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
@@ -503,7 +500,6 @@
 				GCC_PREFIX_HEADER = "popover/popover-Prefix.pch";
 				INFOPLIST_FILE = "popoverTests/popoverTests-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = octest;
 			};
 			name = Release;

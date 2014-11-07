@@ -491,14 +491,16 @@
     // animate into full size
     // First stage animates to 1.05x normal size, then second stage animates back down to 1x size.
     // This two-stage animation creates a little "pop" on open.
-    [UIView animateWithDuration:0.2f delay:0.f options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        self.alpha = 1.f;
-        self.transform = CGAffineTransformMakeScale(1.05f, 1.05f);
-    } completion:^(BOOL finished) {
-        [UIView animateWithDuration:0.08f delay:0.f options:UIViewAnimationOptionCurveEaseInOut animations:^{
-            self.transform = CGAffineTransformIdentity;
-        } completion:nil];
-    }];
+    
+    [UIView animateWithDuration:0.65
+                          delay:0
+         usingSpringWithDamping:0.65
+          initialSpringVelocity:0
+                        options:UIViewAnimationOptionCurveEaseOut animations:^{
+                            self.alpha = 1.f;
+                            self.transform = CGAffineTransformMakeScale(1.f, 1.f);
+                        } completion:nil];
+
 }
 
 - (void)layoutAtPoint:(CGPoint)point inView:(UIView *)view
@@ -797,7 +799,7 @@
 
 - (void)didTapButton:(UIButton *)sender
 {
-    NSUInteger index = [subviewsArray indexOfObject:sender];
+    int index = [subviewsArray indexOfObject:sender];
     
     if (index == NSNotFound) {
         return;
@@ -815,18 +817,27 @@
 
 - (void)dismiss:(BOOL)animated
 {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(popoverViewWillDismiss:)]) {
+        [delegate popoverViewWillDismiss:self];
+    }
+    
     if (!animated)
     {
         [self dismissComplete];
     }
     else
     {
-        [UIView animateWithDuration:0.3f animations:^{
-            self.alpha = 0.1f;
-            self.transform = CGAffineTransformMakeScale(0.1f, 0.1f);
-        } completion:^(BOOL finished) {
-            [self dismissComplete];
-        }];
+        [UIView animateWithDuration:0.4
+                              delay:0
+             usingSpringWithDamping:1
+              initialSpringVelocity:0
+                            options:0
+                         animations:^{
+                                self.alpha = 0.f;
+                                self.transform = CGAffineTransformMakeScale(0.01f, 0.01f);
+                            } completion:^(BOOL finished) {
+                                [self dismissComplete];
+                            }];
     }
 }
 
