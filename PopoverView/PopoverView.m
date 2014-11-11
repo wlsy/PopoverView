@@ -11,6 +11,12 @@
 #import <QuartzCore/QuartzCore.h>
 
 #pragma mark - Implementation
+@interface PopoverView()
+{
+    BOOL _showing;
+}
+
+@end
 
 @implementation PopoverView
 
@@ -472,6 +478,10 @@
 }
 
 - (void)showAtPoint:(CGPoint)point inView:(UIView *)view withContentView:(UIView *)cView {
+    if (_showing) {
+        return;
+    }
+    _showing = YES;
     
     //NSLog(@"point:%f,%f", point.x, point.y);
     
@@ -499,7 +509,11 @@
                         options:UIViewAnimationOptionCurveEaseOut animations:^{
                             self.alpha = 1.f;
                             self.transform = CGAffineTransformMakeScale(1.f, 1.f);
-                        } completion:nil];
+                        } completion:^(BOOL finished) {
+                            if (finished) {
+                                _showing = NO;
+                            }
+                        }];
 
 }
 
